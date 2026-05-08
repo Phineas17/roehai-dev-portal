@@ -8,15 +8,15 @@ export function Layout() {
     <div className="min-h-screen flex flex-col dashboard-bg">
       <DocNavbar />
 
-      {/* Desktop: cartes séparées sur fond coloré */}
-      <div className="flex-1 w-full max-w-7xl mx-auto px-4 lg:px-6 py-5 hidden lg:flex gap-4 items-start">
+      {/* Desktop: cartes séparées sur fond coloré — hauteur fixe, seul le contenu inner défile */}
+      <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 py-5 hidden lg:flex gap-4 items-start h-[calc(100vh-4.5rem)]">
         {/* Sidebar card */}
-        <aside className="w-60 shrink-0 sticky top-20 h-[calc(100vh-5.5rem)] bg-card rounded-2xl border border-border shadow-md flex flex-col overflow-hidden">
+        <aside className="w-60 shrink-0 h-full bg-card rounded-2xl border border-border shadow-md flex flex-col overflow-hidden">
           <Sidebar />
         </aside>
 
         {/* Content card */}
-        <div className="flex-1 min-w-0 bg-card rounded-2xl border border-border shadow-md overflow-hidden flex flex-col min-h-[calc(100vh-5.5rem)]">
+        <div className="flex-1 min-w-0 h-full bg-card rounded-2xl border border-border shadow-md overflow-hidden flex flex-col">
           <main className="flex-1 overflow-y-auto p-8 animate-fade-in">
             <Outlet />
           </main>
