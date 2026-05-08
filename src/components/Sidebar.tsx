@@ -21,8 +21,8 @@ const sections = [
   {
     title: "Référence API",
     items: [
-      { label: "Aria — Appels vocaux", to: "/reference/aria", icon: Phone },
-      { label: "Léa — WhatsApp", to: "/reference/lea", icon: MessageSquare },
+      { label: "Aria - Appels vocaux", to: "/reference/aria", icon: Phone },
+      { label: "Léa - WhatsApp", to: "/reference/lea", icon: MessageSquare },
       { label: "Webhooks", to: "/reference/webhooks", icon: Webhook },
     ],
   },

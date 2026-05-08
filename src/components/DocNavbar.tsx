@@ -30,8 +30,8 @@ const drawerSections = [
   {
     title: "Référence API",
     items: [
-      { label: "Aria — Appels vocaux", to: "/reference/aria", icon: Phone },
-      { label: "Léa — WhatsApp", to: "/reference/lea", icon: MessageSquare },
+      { label: "Aria - Appels vocaux", to: "/reference/aria", icon: Phone },
+      { label: "Léa - WhatsApp", to: "/reference/lea", icon: MessageSquare },
       { label: "Webhooks", to: "/reference/webhooks", icon: Webhook },
     ],
   },
@@ -75,7 +75,7 @@ export function DocNavbar() {
             </div>
           </Link>
 
-          {/* Desktop nav links — lg+ only */}
+          {/* Desktop nav links - lg+ only */}
           <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center text-sm">
             {navLinks.map((item) => (
               <NavLink
@@ -97,7 +97,7 @@ export function DocNavbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* roehai.com — hidden on mobile */}
+            {/* roehai.com - hidden on mobile */}
             <a
               href="https://www.roehai.com"
               target="_blank"
@@ -107,7 +107,7 @@ export function DocNavbar() {
               roehai.com <ExternalLink size={12} />
             </a>
 
-            {/* Dashboard CTA — compact on mobile */}
+            {/* Dashboard CTA - compact on mobile */}
             <a
               href="https://www.roehai.com/dashboard"
               target="_blank"
@@ -117,7 +117,7 @@ export function DocNavbar() {
               Dashboard →
             </a>
 
-            {/* Hamburger — below lg */}
+            {/* Hamburger - below lg */}
             <button
               className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
               onClick={() => setOpen(!open)}
@@ -132,13 +132,13 @@ export function DocNavbar() {
       {/* ── MOBILE / TABLET DRAWER ── */}
       {open && (
         <div className="lg:hidden fixed inset-0 z-40">
-          {/* Backdrop — full screen, below header */}
+          {/* Backdrop - full screen, below header */}
           <div
             className="absolute inset-0 bg-background/60 backdrop-blur-sm"
             onClick={close}
           />
 
-          {/* Floating card — suspended below header, with margins */}
+          {/* Floating card - suspended below header, with margins */}
           <div className="absolute top-[4.5rem] left-3 bottom-3 w-72 max-w-[calc(100vw-1.5rem)] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-left-4 duration-200">
 
             {/* Drawer nav */}

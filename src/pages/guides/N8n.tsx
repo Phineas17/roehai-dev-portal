@@ -11,7 +11,7 @@ const n8nConfig = `// Configuration du nœud HTTP Request dans n8n
   "bodyParameters": {
     "phone_number": "{{ $json.phone }}",
     "contact_name": "{{ $json.name }}",
-    "context": "Lead depuis n8n — source: {{ $json.source }}"
+    "context": "Lead depuis n8n - source: {{ $json.source }}"
   }
 }`;
 

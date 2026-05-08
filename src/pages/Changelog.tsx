@@ -21,7 +21,7 @@ export function Changelog() {
             </div>
             <p className="text-sm text-muted-foreground mb-3">Lancement du portail développeurs et du SDK officiel.</p>
             <ul className="text-sm text-muted-foreground space-y-1.5">
-              <li className="flex gap-2"><span className="text-primary">+</span> SDK <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">roehai-sdk</code> — modules Aria, Léa, WebhookRouter</li>
+              <li className="flex gap-2"><span className="text-primary">+</span> SDK <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">roehai-sdk</code> - modules Aria, Léa, WebhookRouter</li>
               <li className="flex gap-2"><span className="text-primary">+</span> Endpoint <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">POST /trigger-outbound-call</code></li>
               <li className="flex gap-2"><span className="text-primary">+</span> Endpoint <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">POST /ingest-lead</code></li>
               <li className="flex gap-2"><span className="text-primary">+</span> Endpoint <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">POST /lea-whatsapp-send</code></li>

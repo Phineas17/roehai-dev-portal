@@ -19,10 +19,10 @@ const client = new RoehAI({
   apiKey: process.env.ROEHAI_API_KEY!,
 });`;
 
-const errorExample = `// 401 — Clé manquante ou invalide
+const errorExample = `// 401 - Clé manquante ou invalide
 { "error": "Unauthorized", "code": "unauthorized" }
 
-// 403 — Permission insuffisante
+// 403 - Permission insuffisante
 { "error": "Forbidden", "code": "forbidden" }`;
 
 export function Auth() {

@@ -84,7 +84,7 @@ export function WebhookExpressGuide() {
         <div className="p-4 rounded-xl bg-card border border-border text-sm">
           <p className="text-foreground font-medium mb-2">Points importants</p>
           <ul className="text-muted-foreground space-y-1.5">
-            <li>→ Répondez toujours <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">200</code> rapidement — RoehAI retente si pas de réponse en 10s</li>
+            <li>→ Répondez toujours <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">200</code> rapidement - RoehAI retente si pas de réponse en 10s</li>
             <li>→ Traitez le payload de manière asynchrone si nécessaire</li>
             <li>→ En production, vérifiez la signature HMAC (disponible en v1.1)</li>
           </ul>

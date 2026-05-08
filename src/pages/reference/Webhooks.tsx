@@ -83,17 +83,17 @@ https://monapp.com/webhooks/roehai
 const events = [
   {
     event: "call.completed",
-    desc: "Appel terminé normalement — inclut transcript complet, résumé IA et données extraites",
+    desc: "Appel terminé normalement - inclut transcript complet, résumé IA et données extraites",
     color: "text-green-600 dark:text-green-400 bg-green-500/10 border-green-500/20",
   },
   {
     event: "call.failed",
-    desc: "Appel échoué — occupé, messagerie vocale, numéro invalide ou erreur technique",
+    desc: "Appel échoué - occupé, messagerie vocale, numéro invalide ou erreur technique",
     color: "text-destructive bg-destructive/10 border-destructive/20",
   },
   {
     event: "call.started",
-    desc: "L'appel vient d'être décroché — utile pour tracker le timing",
+    desc: "L'appel vient d'être décroché - utile pour tracker le timing",
     color: "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
   },
   {
@@ -123,7 +123,7 @@ export function WebhooksReference() {
         </div>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Webhooks</h1>
         <p className="text-muted-foreground">
-          Recevez les événements RoehAI en temps réel sur votre serveur — transcripts d'appels, qualifications, messages WhatsApp.
+          Recevez les événements RoehAI en temps réel sur votre serveur - transcripts d'appels, qualifications, messages WhatsApp.
         </p>
       </div>
 

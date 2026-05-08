@@ -19,10 +19,10 @@ console.log(call.status);  // "ringing"`;
 const cards = [
   { icon: Zap, title: "Quickstart", desc: "Premier appel IA en 5 minutes.", to: "/quickstart", color: "text-yellow-500" },
   { icon: Package, title: "SDK JavaScript", desc: "Wrapper TypeScript officiel pour Node.js et le navigateur.", to: "/sdk", color: "text-primary" },
-  { icon: Phone, title: "Aria — Agent Vocal", desc: "Déclenchez des appels sortants IA avec transcript et résumé auto.", to: "/reference/aria", color: "text-blue-500" },
-  { icon: MessageSquare, title: "Léa — WhatsApp", desc: "Agent de support WhatsApp — envoyez et recevez automatisé.", to: "/reference/lea", color: "text-primary" },
-  { icon: Webhook, title: "Webhooks", desc: "Recevez les événements en temps réel — transcripts, qualifications.", to: "/reference/webhooks", color: "text-pink-500" },
-  { icon: Terminal, title: "Guides", desc: "Zapier, n8n, Express.js — intégrez RoehAI dans votre stack.", to: "/guides/zapier", color: "text-cyan-500" },
+  { icon: Phone, title: "Aria - Agent Vocal", desc: "Déclenchez des appels sortants IA avec transcript et résumé auto.", to: "/reference/aria", color: "text-blue-500" },
+  { icon: MessageSquare, title: "Léa - WhatsApp", desc: "Agent de support WhatsApp - envoyez et recevez automatisé.", to: "/reference/lea", color: "text-primary" },
+  { icon: Webhook, title: "Webhooks", desc: "Recevez les événements en temps réel - transcripts, qualifications.", to: "/reference/webhooks", color: "text-pink-500" },
+  { icon: Terminal, title: "Guides", desc: "Zapier, n8n, Express.js - intégrez RoehAI dans votre stack.", to: "/guides/zapier", color: "text-cyan-500" },
 ];
 
 export function Home() {
@@ -31,7 +31,7 @@ export function Home() {
       {/* Badge */}
       <div className="inline-flex items-center gap-2 text-xs bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full mb-5 font-medium">
         <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-        API v1 — Stable
+        API v1 - Stable
       </div>
 
       {/* Hero */}

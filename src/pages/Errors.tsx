@@ -34,8 +34,8 @@ const errors = [
   { code: "invalid_params", http: "422", color: "text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Paramètres manquants ou format invalide.", action: "Vérifiez que phone_number est en format E.164 (+33...)." },
   { code: "rate_limited", http: "429", color: "text-primary bg-primary/10 border-primary/20", desc: "Trop de requêtes en peu de temps.", action: "Implémentez un retry avec backoff exponentiel (voir exemple)." },
   { code: "server_error", http: "500", color: "text-destructive bg-destructive/10 border-destructive/20", desc: "Erreur interne côté serveur RoehAI.", action: "Réessayez après quelques secondes. Contactez le support si persiste." },
-  { code: "timeout", http: "—", color: "text-muted-foreground bg-muted border-border", desc: "La requête a dépassé le délai (30s par défaut).", action: "Augmentez le timeout via la config SDK ou réessayez." },
-  { code: "network_error", http: "—", color: "text-muted-foreground bg-muted border-border", desc: "Impossible de joindre le serveur RoehAI.", action: "Vérifiez votre connexion internet ou le statut de l'API." },
+  { code: "timeout", http: "-", color: "text-muted-foreground bg-muted border-border", desc: "La requête a dépassé le délai (30s par défaut).", action: "Augmentez le timeout via la config SDK ou réessayez." },
+  { code: "network_error", http: "-", color: "text-muted-foreground bg-muted border-border", desc: "Impossible de joindre le serveur RoehAI.", action: "Vérifiez votre connexion internet ou le statut de l'API." },
 ];
 
 export function Errors() {

@@ -5,7 +5,7 @@ const zapierPayload = `// Payload envoyé par votre Zap vers RoehAI
   "phone_number": "{{contact.phone}}",
   "contact_name": "{{contact.first_name}} {{contact.last_name}}",
   "business_name": "{{company.name}}",
-  "context": "Lead depuis HubSpot — Score : {{contact.score}}",
+  "context": "Lead depuis HubSpot - Score : {{contact.score}}",
   "source": "zapier_hubspot"
 }`;
 
@@ -57,7 +57,7 @@ export function ZapierGuide() {
         <p className="text-sm text-muted-foreground mb-1">Guides → Zapier</p>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Intégrer Zapier</h1>
         <p className="text-muted-foreground">
-          Connectez RoehAI à vos outils sans coder — déclenchez des appels depuis HubSpot, Typeform, Google Sheets, et plus.
+          Connectez RoehAI à vos outils sans coder - déclenchez des appels depuis HubSpot, Typeform, Google Sheets, et plus.
         </p>
       </div>
 
@@ -84,10 +84,10 @@ export function ZapierGuide() {
       <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
         <p className="text-foreground font-medium mb-2">Cas d'usage courants avec Zapier</p>
         <ul className="text-muted-foreground space-y-1.5">
-          <li>→ <strong className="text-foreground">HubSpot</strong> — appeler automatiquement les nouveaux leads entrants</li>
-          <li>→ <strong className="text-foreground">Typeform</strong> — appeler les prospects qui remplissent un formulaire</li>
-          <li>→ <strong className="text-foreground">Google Sheets</strong> — lancer des campagnes d'appels depuis une liste</li>
-          <li>→ <strong className="text-foreground">Calendly</strong> — confirmer les RDV par appel vocal</li>
+          <li>→ <strong className="text-foreground">HubSpot</strong> - appeler automatiquement les nouveaux leads entrants</li>
+          <li>→ <strong className="text-foreground">Typeform</strong> - appeler les prospects qui remplissent un formulaire</li>
+          <li>→ <strong className="text-foreground">Google Sheets</strong> - lancer des campagnes d'appels depuis une liste</li>
+          <li>→ <strong className="text-foreground">Calendly</strong> - confirmer les RDV par appel vocal</li>
         </ul>
       </div>
     </div>

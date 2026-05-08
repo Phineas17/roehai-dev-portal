@@ -1,7 +1,7 @@
 import { CodeBlock } from "@/components/CodeBlock";
 
 const triggerCallSDK = `const call = await client.aria.triggerCall({
-  phone_number: "+33612345678",   // Requis — format E.164
+  phone_number: "+33612345678",   // Requis - format E.164
   contact_name: "Jean Dupont",    // Optionnel
   business_name: "Salon Beauté",  // Optionnel
   pain_point: "Perd 30% des appels",
@@ -88,7 +88,7 @@ export function AriaReference() {
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-500 border border-blue-500/20 px-2.5 py-1 rounded-full font-medium">Agent Vocal</span>
         </div>
-        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Aria — Appels Vocaux IA</h1>
+        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Aria - Appels Vocaux IA</h1>
         <p className="text-muted-foreground">
           Déclenchez des appels téléphoniques IA sortants, récupérez les transcripts et qualifications en temps réel.
         </p>
@@ -117,10 +117,10 @@ export function AriaReference() {
               </thead>
               <tbody>
                 <ParamRow name="phone_number" type="string" required desc="Numéro à appeler au format E.164 (ex: +33612345678)" />
-                <ParamRow name="contact_name" type="string" desc="Nom du contact — injecté dans le prompt de l'agent" />
+                <ParamRow name="contact_name" type="string" desc="Nom du contact - injecté dans le prompt de l'agent" />
                 <ParamRow name="business_name" type="string" desc="Nom de l'entreprise" />
-                <ParamRow name="pain_point" type="string" desc="Problème principal identifié — contextualise l'appel" />
-                <ParamRow name="context" type="string" desc="Contexte libre — source du lead, informations complémentaires" />
+                <ParamRow name="pain_point" type="string" desc="Problème principal identifié - contextualise l'appel" />
+                <ParamRow name="context" type="string" desc="Contexte libre - source du lead, informations complémentaires" />
                 <ParamRow name="from_number" type="string" desc="Numéro appelant (override du numéro par défaut)" />
                 <ParamRow name="agent_user_id" type="string" desc="UUID de l'utilisateur dont la config agent sera utilisée" />
               </tbody>
@@ -136,7 +136,7 @@ export function AriaReference() {
         <section>
           <h2 className="text-xl font-semibold text-foreground mb-2">getCallStatus(callId)</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Récupère les données complètes d'un appel — statut, transcript intégral, résumé IA et données extraites.
+            Récupère les données complètes d'un appel - statut, transcript intégral, résumé IA et données extraites.
           </p>
           <CodeBlock code={getStatusExample} language="typescript" />
         </section>
