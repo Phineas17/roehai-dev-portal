@@ -1,6 +1,6 @@
 import { CodeBlock } from "@/components/CodeBlock";
 
-const retryExample = `import { RoehAI, RoehAIError } from "@roehai/sdk";
+const retryExample = `import { RoehAI, RoehAIError } from "roehai-sdk";
 
 const client = new RoehAI({ apiKey: process.env.ROEHAI_API_KEY! });
 
@@ -28,22 +28,23 @@ async function triggerWithRetry(phone: string, maxRetries = 3) {
 }`;
 
 const errors = [
-  { code: "unauthorized", http: "401", color: "text-red-300 bg-red-900/20 border-red-500/20", desc: "Clé API manquante, invalide ou révoquée.", action: "Vérifiez votre clé dans Dashboard → Paramètres → Clés API." },
-  { code: "forbidden", http: "403", color: "text-orange-300 bg-orange-900/20 border-orange-500/20", desc: "Clé valide mais l'opération dépasse vos permissions.", action: "Vérifiez que votre plan inclut cette fonctionnalité." },
-  { code: "not_found", http: "404", color: "text-yellow-300 bg-yellow-900/20 border-yellow-500/20", desc: "Ressource introuvable (ex: call_id inexistant).", action: "Vérifiez l'identifiant passé en paramètre." },
-  { code: "invalid_params", http: "422", color: "text-yellow-300 bg-yellow-900/20 border-yellow-500/20", desc: "Paramètres manquants ou format invalide.", action: "Vérifiez que phone_number est en format E.164 (+33...)." },
-  { code: "rate_limited", http: "429", color: "text-purple-300 bg-purple-900/20 border-purple-500/20", desc: "Trop de requêtes en peu de temps.", action: "Implémentez un retry avec backoff exponentiel (voir exemple)." },
-  { code: "server_error", http: "500", color: "text-red-300 bg-red-900/20 border-red-500/20", desc: "Erreur interne côté serveur RoehAI.", action: "Réessayez après quelques secondes. Contactez le support si persiste." },
-  { code: "timeout", http: "—", color: "text-gray-300 bg-gray-900/20 border-gray-500/20", desc: "La requête a dépassé le délai (30s par défaut).", action: "Augmentez le timeout via la config SDK ou réessayez." },
-  { code: "network_error", http: "—", color: "text-gray-300 bg-gray-900/20 border-gray-500/20", desc: "Impossible de joindre le serveur RoehAI.", action: "Vérifiez votre connexion internet ou le statut de l'API." },
+  { code: "unauthorized", http: "401", color: "text-destructive bg-destructive/10 border-destructive/20", desc: "Clé API manquante, invalide ou révoquée.", action: "Vérifiez votre clé dans Dashboard → Paramètres → Clés API." },
+  { code: "forbidden", http: "403", color: "text-orange-600 dark:text-orange-400 bg-orange-500/10 border-orange-500/20", desc: "Clé valide mais l'opération dépasse vos permissions.", action: "Vérifiez que votre plan inclut cette fonctionnalité." },
+  { code: "not_found", http: "404", color: "text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Ressource introuvable (ex: call_id inexistant).", action: "Vérifiez l'identifiant passé en paramètre." },
+  { code: "invalid_params", http: "422", color: "text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Paramètres manquants ou format invalide.", action: "Vérifiez que phone_number est en format E.164 (+33...)." },
+  { code: "rate_limited", http: "429", color: "text-primary bg-primary/10 border-primary/20", desc: "Trop de requêtes en peu de temps.", action: "Implémentez un retry avec backoff exponentiel (voir exemple)." },
+  { code: "server_error", http: "500", color: "text-destructive bg-destructive/10 border-destructive/20", desc: "Erreur interne côté serveur RoehAI.", action: "Réessayez après quelques secondes. Contactez le support si persiste." },
+  { code: "timeout", http: "—", color: "text-muted-foreground bg-muted border-border", desc: "La requête a dépassé le délai (30s par défaut).", action: "Augmentez le timeout via la config SDK ou réessayez." },
+  { code: "network_error", http: "—", color: "text-muted-foreground bg-muted border-border", desc: "Impossible de joindre le serveur RoehAI.", action: "Vérifiez votre connexion internet ou le statut de l'API." },
 ];
 
 export function Errors() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Codes d'erreur</h1>
-        <p className="text-[#a09dc0]">
+        <p className="text-sm text-muted-foreground mb-1">Référence</p>
+        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Codes d'erreur</h1>
+        <p className="text-muted-foreground">
           Référence complète des erreurs retournées par l'API et le SDK RoehAI.
         </p>
       </div>
@@ -52,20 +53,20 @@ export function Errors() {
         <section>
           <div className="flex flex-col gap-3">
             {errors.map((e) => (
-              <div key={e.code} className="p-4 rounded-xl bg-[#1a1a35] border border-white/8">
+              <div key={e.code} className="p-4 rounded-xl bg-card border border-border">
                 <div className="flex items-center gap-3 mb-2">
                   <code className={`text-xs font-mono px-2 py-0.5 rounded border ${e.color}`}>{e.code}</code>
-                  <span className="text-xs text-[#a09dc0] font-mono">HTTP {e.http}</span>
+                  <span className="text-xs text-muted-foreground font-mono">HTTP {e.http}</span>
                 </div>
-                <p className="text-sm text-[#a09dc0] mb-1">{e.desc}</p>
-                <p className="text-sm text-white">→ {e.action}</p>
+                <p className="text-sm text-muted-foreground mb-1">{e.desc}</p>
+                <p className="text-sm text-foreground">→ {e.action}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-white mb-2">Retry avec backoff</h2>
+          <h2 className="text-xl font-semibold text-foreground mb-2">Retry avec backoff</h2>
           <CodeBlock code={retryExample} language="typescript" filename="retry.ts" />
         </section>
       </div>

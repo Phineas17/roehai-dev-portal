@@ -54,9 +54,9 @@ export function ZapierGuide() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8">
-        <div className="text-xs text-[#a09dc0] mb-2">Guides → Zapier</div>
-        <h1 className="text-3xl font-bold text-white mb-2">Intégrer Zapier</h1>
-        <p className="text-[#a09dc0]">
+        <p className="text-sm text-muted-foreground mb-1">Guides → Zapier</p>
+        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Intégrer Zapier</h1>
+        <p className="text-muted-foreground">
           Connectez RoehAI à vos outils sans coder — déclenchez des appels depuis HubSpot, Typeform, Google Sheets, et plus.
         </p>
       </div>
@@ -65,29 +65,29 @@ export function ZapierGuide() {
         {steps.map((step) => (
           <div key={step.n} className="flex gap-4">
             <div className="flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">
                 {step.n}
               </div>
               {step.n < steps.length && (
-                <div className="w-px flex-1 bg-white/8 mt-2" />
+                <div className="w-px flex-1 bg-border mt-2" />
               )}
             </div>
             <div className="flex-1 pb-4">
-              <h2 className="text-white font-semibold mb-1">{step.title}</h2>
-              {step.desc && <p className="text-sm text-[#a09dc0] mb-2">{step.desc}</p>}
+              <h2 className="text-foreground font-semibold mb-1">{step.title}</h2>
+              {step.desc && <p className="text-sm text-muted-foreground mb-2">{step.desc}</p>}
               {step.code && <CodeBlock code={step.code} language={step.language} />}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-8 p-4 rounded-xl bg-[#1a1a35] border border-white/8 text-sm">
-        <p className="text-white font-medium mb-2">Cas d'usage courants avec Zapier</p>
-        <ul className="text-[#a09dc0] space-y-1.5">
-          <li>→ <strong className="text-white">HubSpot</strong> — appeler automatiquement les nouveaux leads entrants</li>
-          <li>→ <strong className="text-white">Typeform</strong> — appeler les prospects qui remplissent un formulaire</li>
-          <li>→ <strong className="text-white">Google Sheets</strong> — lancer des campagnes d'appels depuis une liste</li>
-          <li>→ <strong className="text-white">Calendly</strong> — confirmer les RDV par appel vocal</li>
+      <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
+        <p className="text-foreground font-medium mb-2">Cas d'usage courants avec Zapier</p>
+        <ul className="text-muted-foreground space-y-1.5">
+          <li>→ <strong className="text-foreground">HubSpot</strong> — appeler automatiquement les nouveaux leads entrants</li>
+          <li>→ <strong className="text-foreground">Typeform</strong> — appeler les prospects qui remplissent un formulaire</li>
+          <li>→ <strong className="text-foreground">Google Sheets</strong> — lancer des campagnes d'appels depuis une liste</li>
+          <li>→ <strong className="text-foreground">Calendly</strong> — confirmer les RDV par appel vocal</li>
         </ul>
       </div>
     </div>
