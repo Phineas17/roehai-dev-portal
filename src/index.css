@@ -79,6 +79,14 @@
     position: relative;
   }
 
+  /* Dashboard background — fond coloré derrière les cartes */
+  .dashboard-bg {
+    background-color: hsl(160, 18%, 93%);
+  }
+  .dark .dashboard-bg {
+    background-color: hsl(160, 8%, 3%);
+  }
+
   /* Nav active — sidebar */
   .nav-active {
     background: hsl(var(--primary) / 0.1);

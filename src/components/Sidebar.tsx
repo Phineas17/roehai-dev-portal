@@ -46,7 +46,7 @@ const sections = [
 
 export function Sidebar() {
   return (
-    <aside className="w-56 shrink-0 hidden lg:flex flex-col gap-5 py-8 pr-4 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+    <div className="flex flex-col gap-5 py-5 px-3 overflow-y-auto flex-1">
       {sections.map((section) => (
         <div key={section.title}>
           <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground px-3 mb-1.5">
@@ -83,9 +83,9 @@ export function Sidebar() {
           </ul>
         </div>
       ))}
-      <div className="mt-auto px-3 pb-4">
+      <div className="mt-auto px-3 pb-2">
         <p className="text-xs text-muted-foreground">API version: <span className="text-primary font-medium">v1</span></p>
       </div>
-    </aside>
+    </div>
   );
 }
