@@ -30,6 +30,7 @@ export default function App() {
           <Route path="/guides/webhook-express" element={<WebhookExpressGuide />} />
           <Route path="/guides/zapier" element={<ZapierGuide />} />
           <Route path="/guides/n8n" element={<N8nGuide />} />
+          <Route path="/guides/llm" element={<AIAssistantsGuide />} />
           <Route path="/guides/assistants-ia" element={<AIAssistantsGuide />} />
           <Route path="/errors" element={<Errors />} />
           <Route path="/changelog" element={<Changelog />} />

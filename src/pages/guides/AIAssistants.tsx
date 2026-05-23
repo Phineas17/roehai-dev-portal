@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/CodeBlock";
+import { LLMLogoStack } from "@/components/LLMLogoStack";
 
 const mcpEndpoint = `https://www.roehai.com/mcp`;
 
@@ -6,7 +7,7 @@ const steps = [
   {
     n: 1,
     title: "Verifier votre agent RoehAI",
-    desc: "Avant de connecter un assistant IA externe, assurez-vous que votre agent vocal est configure dans RoehAI avec son nom, son entreprise, ses consignes et ses messages d'accueil.",
+    desc: "Avant de connecter un LLM externe, assurez-vous que votre agent vocal est configure dans RoehAI avec son nom, son entreprise, ses consignes et ses messages d'accueil.",
   },
   {
     n: 2,
@@ -47,12 +48,15 @@ export function AIAssistantsGuide() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8">
-        <p className="text-sm text-muted-foreground mb-1">Guides → Assistants IA</p>
+        <div className="mb-4">
+          <LLMLogoStack />
+        </div>
+        <p className="text-sm text-muted-foreground mb-1">Guides → LLM</p>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">
-          Connecter votre agent RoehAI a un assistant IA
+          Connecter votre agent RoehAI a un LLM
         </h1>
         <p className="text-muted-foreground">
-          Exposez votre agent vocal RoehAI aux assistants compatibles MCP pour consulter sa configuration,
+          Exposez votre agent vocal RoehAI aux LLM compatibles MCP pour consulter sa configuration,
           ajuster ses consignes et preparer des actions depuis votre espace de travail IA.
         </p>
       </div>
