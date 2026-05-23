@@ -44,6 +44,27 @@ Configure mon agent pour se presenter comme l'assistant de mon entreprise.
 
 Prepare un appel pour ce prospect, mais ne le lance pas sans ma confirmation.`;
 
+const llmExamples = [
+  {
+    name: "ChatGPT",
+    desc: "Creer une app personnalisee, ajouter l'URL MCP, puis autoriser RoehAI via OAuth.",
+  },
+  {
+    name: "Claude",
+    desc: "Utiliser une connexion MCP distante lorsque l'espace de travail le permet, puis tester les outils RoehAI.",
+  },
+  {
+    name: "Gemini",
+    desc: "Reutiliser le meme point d'entree MCP des que l'environnement prend en charge les outils MCP distants.",
+  },
+];
+
+const screenshotSlots = [
+  "Creation de la connexion MCP",
+  "Autorisation OAuth RoehAI",
+  "Outils RoehAI detectes",
+];
+
 export function AIAssistantsGuide() {
   return (
     <div className="max-w-3xl">
@@ -59,6 +80,10 @@ export function AIAssistantsGuide() {
           Exposez votre agent vocal RoehAI aux LLM compatibles MCP pour consulter sa configuration,
           ajuster ses consignes et preparer des actions depuis votre espace de travail IA.
         </p>
+      </div>
+
+      <div className="mb-8">
+        <LLMLogoStack showLabels />
       </div>
 
       <div className="rounded-xl bg-card border border-border p-4 mb-8 text-sm">
@@ -87,6 +112,29 @@ export function AIAssistantsGuide() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
+        <p className="text-foreground font-medium mb-3">Exemples de connexion LLM</p>
+        <div className="grid gap-3">
+          {llmExamples.map((item) => (
+            <div key={item.name} className="rounded-lg border border-border bg-muted/30 p-3">
+              <p className="font-medium text-foreground">{item.name}</p>
+              <p className="mt-1 text-muted-foreground">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 p-4 rounded-xl bg-card border border-border text-sm">
+        <p className="text-foreground font-medium mb-3">Captures d'ecran a ajouter</p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {screenshotSlots.map((slot) => (
+            <div key={slot} className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-3 text-center text-xs text-muted-foreground">
+              {slot}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">

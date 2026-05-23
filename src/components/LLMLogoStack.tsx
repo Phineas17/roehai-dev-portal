@@ -4,6 +4,7 @@ import geminiLogo from "@/assets/integrations/gemini-logo.png";
 
 interface LLMLogoStackProps {
   className?: string;
+  showLabels?: boolean;
 }
 
 function OpenAILogo() {
@@ -42,7 +43,28 @@ const logos = [
   { label: "Gemini", icon: GeminiLogo, bg: "bg-[#eef2ff] dark:bg-[#101936]" },
 ];
 
-export function LLMLogoStack({ className }: LLMLogoStackProps) {
+export function LLMLogoStack({ className, showLabels = false }: LLMLogoStackProps) {
+  if (showLabels) {
+    return (
+      <div className={cn("grid gap-3 sm:grid-cols-3", className)}>
+        {logos.map((logo) => {
+          const Icon = logo.icon;
+          return (
+            <div
+              key={logo.label}
+              className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
+            >
+              <span className={cn("flex h-10 w-10 items-center justify-center rounded-full border border-border shadow-sm", logo.bg)}>
+                <Icon />
+              </span>
+              <span className="text-sm font-medium text-foreground">{logo.label}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <span className={cn("flex items-center", className)} aria-label="OpenAI, Claude et Gemini">
       {logos.map((logo, index) => {
