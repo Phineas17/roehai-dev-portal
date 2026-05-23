@@ -59,10 +59,42 @@ const llmExamples = [
   },
 ];
 
-const screenshotSlots = [
-  "Creation de la connexion MCP",
-  "Autorisation OAuth RoehAI",
-  "Outils RoehAI detectes",
+const screenshots = [
+  {
+    title: "Bouton LLM dans RoehAI",
+    desc: "Point d'entree depuis la configuration de l'agent vocal.",
+    src: "/screenshots/llm-guide/01-dashboard-llm-button.png",
+  },
+  {
+    title: "Guide LLM du portail developpeur",
+    desc: "Vue du guide avec les logos LLM, l'endpoint MCP et les exemples.",
+    src: "/screenshots/llm-guide/02-dev-portal-llm-guide.png",
+  },
+  {
+    title: "Creation de l'app dans ChatGPT",
+    desc: "Parametres de creation de l'app ou du connecteur RoehAI.",
+    src: "/screenshots/llm-guide/03-chatgpt-apps-settings.png",
+  },
+  {
+    title: "URL MCP et scopes",
+    desc: "Configuration de l'URL MCP publique et des permissions demandees.",
+    src: "/screenshots/llm-guide/04-chatgpt-mcp-url-scopes.png",
+  },
+  {
+    title: "Endpoints OAuth",
+    desc: "Configuration des URLs d'autorisation et de token OAuth.",
+    src: "/screenshots/llm-guide/05-chatgpt-oauth-endpoints.png",
+  },
+  {
+    title: "Autorisation RoehAI",
+    desc: "Ecran d'autorisation affiche avant de connecter le LLM au compte RoehAI.",
+    src: "/screenshots/llm-guide/04-roehai-oauth-authorization.png",
+  },
+  {
+    title: "Outils detectes dans ChatGPT",
+    desc: "Validation finale: ChatGPT voit les outils exposes par RoehAI.",
+    src: "/screenshots/llm-guide/07-chatgpt-after-connection.png",
+  },
 ];
 
 export function AIAssistantsGuide() {
@@ -127,12 +159,25 @@ export function AIAssistantsGuide() {
       </div>
 
       <div className="mt-6 p-4 rounded-xl bg-card border border-border text-sm">
-        <p className="text-foreground font-medium mb-3">Captures d'ecran a ajouter</p>
-        <div className="grid gap-3 sm:grid-cols-3">
-          {screenshotSlots.map((slot) => (
-            <div key={slot} className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-3 text-center text-xs text-muted-foreground">
-              {slot}
-            </div>
+        <p className="text-foreground font-medium mb-2">Parcours en captures</p>
+        <p className="text-muted-foreground mb-4">
+          Ces captures montrent le chemin complet: depuis RoehAI, vers la configuration du LLM,
+          jusqu'a l'autorisation OAuth et la detection des outils.
+        </p>
+        <div className="grid gap-4">
+          {screenshots.map((item) => (
+            <figure key={item.src} className="overflow-hidden rounded-xl border border-border bg-muted/20">
+              <img
+                src={item.src}
+                alt={item.title}
+                className="w-full border-b border-border bg-background object-cover"
+                loading="lazy"
+              />
+              <figcaption className="p-3">
+                <p className="font-medium text-foreground">{item.title}</p>
+                <p className="mt-1 text-muted-foreground">{item.desc}</p>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
