@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Zap, Book, Code2, Webhook, Key, Terminal, Package, ChevronRight, Phone, MessageSquare, Users, LayoutDashboard } from "lucide-react";
+import { Zap, Book, Code2, Webhook, Key, Terminal, Package, ChevronRight, Phone, MessageSquare, Users, LayoutDashboard, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const sections = [
@@ -31,6 +31,7 @@ const sections = [
     items: [
       { label: "Intégrer Zapier", to: "/guides/zapier", icon: LayoutDashboard },
       { label: "Intégrer n8n", to: "/guides/n8n", icon: LayoutDashboard },
+      { label: "Assistants IA", to: "/guides/assistants-ia", icon: BrainCircuit },
       { label: "Webhook Express.js", to: "/guides/webhook-express", icon: Terminal },
       { label: "Qualifier des leads", to: "/guides/leads", icon: Users },
     ],
