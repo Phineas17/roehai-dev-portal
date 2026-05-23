@@ -31,7 +31,7 @@ const sections = [
     items: [
       { label: "Intégrer Zapier", to: "/guides/zapier", icon: LayoutDashboard },
       { label: "Intégrer n8n", to: "/guides/n8n", icon: LayoutDashboard },
-      { label: "Assistants IA", to: "/guides/assistants-ia", icon: BrainCircuit },
+      { label: "Connecter aux LLM", to: "/guides/llm", icon: BrainCircuit },
       { label: "Webhook Express.js", to: "/guides/webhook-express", icon: Terminal },
       { label: "Qualifier des leads", to: "/guides/leads", icon: Users },
     ],
