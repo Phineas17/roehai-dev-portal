@@ -28,7 +28,7 @@ webhooks.on("call.failed", async (payload) => {
 
 webhooks.on("lead.qualified", async (payload) => {
   const { business_name, qualification_level } = payload.lead_data;
-  console.log(\`Lead chaud : \${business_name} → \${qualification_level}\`);
+  console.log(\`Lead chaud : \${business_name}, qualification \${qualification_level}\`);
 });
 
 // ─── Endpoint ────────────────────────────────────────────────────────────────
@@ -49,13 +49,13 @@ const ngrokTip = `# Tester en local avec ngrok
 npx ngrok http 3000
 
 # Copiez l'URL HTTPS générée (ex: https://abc.ngrok.io)
-# et collez-la dans Dashboard → Paramètres → Webhooks`;
+# et collez-la dans Dashboard, Paramètres, Webhooks`;
 
 export function WebhookExpressGuide() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8">
-        <p className="text-sm text-muted-foreground mb-1">Guides → Webhook</p>
+        <p className="text-sm text-muted-foreground mb-1">Guides / Webhook</p>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Webhook avec Express.js</h1>
         <p className="text-muted-foreground">
           Recevez et traitez les événements RoehAI dans une API Node.js Express.
@@ -84,9 +84,9 @@ export function WebhookExpressGuide() {
         <div className="p-4 rounded-xl bg-card border border-border text-sm">
           <p className="text-foreground font-medium mb-2">Points importants</p>
           <ul className="text-muted-foreground space-y-1.5">
-            <li>→ Répondez toujours <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">200</code> rapidement - RoehAI retente si pas de réponse en 10s</li>
-            <li>→ Traitez le payload de manière asynchrone si nécessaire</li>
-            <li>→ En production, vérifiez la signature HMAC (disponible en v1.1)</li>
+            <li>Répondez toujours <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">200</code> rapidement. RoehAI retente si aucune réponse n'arrive en 10s</li>
+            <li>Traitez le payload de manière asynchrone si nécessaire</li>
+            <li>En production, vérifiez la signature HMAC disponible en v1.1</li>
           </ul>
         </div>
       </div>

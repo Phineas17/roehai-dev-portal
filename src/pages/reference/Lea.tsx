@@ -24,7 +24,7 @@ const listExample = `const conversations = await client.lea.listConversations({ 
   last_message_at: "2026-05-08T14:30:00Z"
 }]`;
 
-const followUpExample = `// Scénario : Aria appelle, échoue → Léa envoie un WhatsApp de suivi
+const followUpExample = `// Scénario : Aria appelle, échoue, puis Léa envoie un WhatsApp de suivi
 router.on("call.failed", async (payload) => {
   if (payload.call_data.reason === "no-answer") {
     await client.lea.sendMessage({
@@ -42,7 +42,7 @@ export function LeaReference() {
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-primary/10 text-primary border border-primary/20 px-2.5 py-1 rounded-full font-medium">Agent WhatsApp</span>
         </div>
-        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Léa - Agent WhatsApp IA</h1>
+        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">Léa, agent WhatsApp IA</h1>
         <p className="text-muted-foreground">
           Envoyez des messages WhatsApp proactifs et gérez des conversations automatisées via l'agent Léa.
         </p>
@@ -75,7 +75,7 @@ export function LeaReference() {
         <section>
           <h2 className="text-xl font-semibold text-foreground mb-2">Cas d'usage : suivi post-appel</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Combinez Aria et Léa - si un appel échoue, Léa envoie automatiquement un WhatsApp de relance.
+            Combinez Aria et Léa. Si un appel échoue, Léa envoie automatiquement un WhatsApp de relance.
           </p>
           <CodeBlock code={followUpExample} language="typescript" filename="follow-up.ts" />
         </section>

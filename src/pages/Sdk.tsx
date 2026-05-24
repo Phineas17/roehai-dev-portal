@@ -37,7 +37,7 @@ const errorCodes = [
   ["forbidden", "403", "Permission insuffisante pour cette opération"],
   ["not_found", "404", "Ressource introuvable"],
   ["invalid_params", "422", "Paramètres manquants ou format invalide"],
-  ["rate_limited", "429", "Trop de requêtes - implémenter un retry"],
+  ["rate_limited", "429", "Trop de requêtes. Implémentez un retry"],
   ["server_error", "500", "Erreur interne côté serveur RoehAI"],
   ["timeout", "-", "Requête dépassant le délai configuré"],
   ["network_error", "-", "Impossible de joindre le serveur RoehAI"],
@@ -50,7 +50,7 @@ export function Sdk() {
         <p className="text-sm text-muted-foreground mb-1">SDK</p>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">SDK JavaScript / TypeScript</h1>
         <p className="text-muted-foreground">
-          Wrapper TypeScript officiel - fonctionne dans Node.js, Deno, Bun et le navigateur.
+          Wrapper TypeScript officiel compatible avec Node.js, Deno, Bun et le navigateur.
         </p>
       </div>
 

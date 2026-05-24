@@ -75,10 +75,10 @@ export function Auth() {
               <h3 className="text-sm font-semibold text-foreground">Gérer vos clés API</h3>
             </div>
             <ul className="text-sm text-muted-foreground space-y-1.5">
-              <li>→ Créez des clés dans <strong className="text-foreground">Dashboard → Paramètres → Clés API</strong></li>
-              <li>→ Révoquez immédiatement une clé compromise depuis le dashboard</li>
-              <li>→ Utilisez une clé différente par environnement (dev / staging / prod)</li>
-              <li>→ Les clés commencent par <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">sk_</code></li>
+              <li>Créez des clés dans <strong className="text-foreground">Dashboard, Paramètres, Clés API</strong></li>
+              <li>Révoquez immédiatement une clé compromise depuis le dashboard</li>
+              <li>Utilisez une clé différente par environnement, comme dev, staging et prod</li>
+              <li>Les clés commencent par <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">sk_</code></li>
             </ul>
           </div>
         </section>

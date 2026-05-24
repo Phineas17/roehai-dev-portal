@@ -104,7 +104,7 @@ export function AIAssistantsGuide() {
         <div className="mb-4">
           <LLMLogoStack />
         </div>
-        <p className="text-sm text-muted-foreground mb-1">Guides → LLM</p>
+        <p className="text-sm text-muted-foreground mb-1">Guides / LLM</p>
         <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">
           Connecter votre agent RoehAI a un LLM
         </h1>
@@ -185,7 +185,7 @@ export function AIAssistantsGuide() {
       <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
         <p className="text-foreground font-medium mb-2">Exemple pour ChatGPT</p>
         <p className="text-muted-foreground mb-3">
-          Dans ChatGPT, creez une app personnalisee depuis Settings → Apps, scannez les outils,
+          Dans ChatGPT, creez une app personnalisee depuis Settings puis Apps, scannez les outils,
           puis autorisez RoehAI via OAuth.
         </p>
         <CodeBlock code={prompts} language="text" />

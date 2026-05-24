@@ -38,7 +38,7 @@ export function TopBar() {
           rel="noopener noreferrer"
           className="text-sm bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg transition-colors"
         >
-          Dashboard →
+          Dashboard
         </a>
       </div>
     </header>

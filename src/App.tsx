@@ -11,6 +11,7 @@ import { WebhookExpressGuide } from "@/pages/guides/WebhookExpress";
 import { ZapierGuide } from "@/pages/guides/Zapier";
 import { N8nGuide } from "@/pages/guides/N8n";
 import { AIAssistantsGuide } from "@/pages/guides/AIAssistants";
+import { LeadsGuide } from "@/pages/guides/Leads";
 import { Errors } from "@/pages/Errors";
 import { Changelog } from "@/pages/Changelog";
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/guides/webhook-express" element={<WebhookExpressGuide />} />
           <Route path="/guides/zapier" element={<ZapierGuide />} />
           <Route path="/guides/n8n" element={<N8nGuide />} />
+          <Route path="/guides/leads" element={<LeadsGuide />} />
           <Route path="/guides/llm" element={<AIAssistantsGuide />} />
           <Route path="/guides/assistants-ia" element={<AIAssistantsGuide />} />
           <Route path="/errors" element={<Errors />} />

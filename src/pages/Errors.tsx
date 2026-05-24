@@ -28,7 +28,7 @@ async function triggerWithRetry(phone: string, maxRetries = 3) {
 }`;
 
 const errors = [
-  { code: "unauthorized", http: "401", color: "text-destructive bg-destructive/10 border-destructive/20", desc: "Clé API manquante, invalide ou révoquée.", action: "Vérifiez votre clé dans Dashboard → Paramètres → Clés API." },
+  { code: "unauthorized", http: "401", color: "text-destructive bg-destructive/10 border-destructive/20", desc: "Clé API manquante, invalide ou révoquée.", action: "Vérifiez votre clé dans Dashboard, Paramètres, Clés API." },
   { code: "forbidden", http: "403", color: "text-orange-600 dark:text-orange-400 bg-orange-500/10 border-orange-500/20", desc: "Clé valide mais l'opération dépasse vos permissions.", action: "Vérifiez que votre plan inclut cette fonctionnalité." },
   { code: "not_found", http: "404", color: "text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Ressource introuvable (ex: call_id inexistant).", action: "Vérifiez l'identifiant passé en paramètre." },
   { code: "invalid_params", http: "422", color: "text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Paramètres manquants ou format invalide.", action: "Vérifiez que phone_number est en format E.164 (+33...)." },
@@ -59,7 +59,7 @@ export function Errors() {
                   <span className="text-xs text-muted-foreground font-mono">HTTP {e.http}</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-1">{e.desc}</p>
-                <p className="text-sm text-foreground">→ {e.action}</p>
+                <p className="text-sm text-foreground">{e.action}</p>
               </div>
             ))}
           </div>

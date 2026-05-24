@@ -5,24 +5,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 150 10% 8%;
+    --foreground: 150 14% 7%;
     --card: 0 0% 100%;
-    --card-foreground: 150 10% 8%;
+    --card-foreground: 150 14% 7%;
     --popover: 0 0% 100%;
-    --popover-foreground: 150 10% 8%;
-    --primary: 142 72% 45%;
+    --popover-foreground: 150 14% 7%;
+    --primary: 145 70% 32%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 140 30% 98%;
-    --secondary-foreground: 150 10% 15%;
-    --muted: 140 20% 96%;
-    --muted-foreground: 150 8% 40%;
-    --accent: 140 30% 94%;
-    --accent-foreground: 150 10% 15%;
+    --secondary: 140 28% 97%;
+    --secondary-foreground: 150 14% 12%;
+    --muted: 140 18% 95%;
+    --muted-foreground: 150 10% 28%;
+    --accent: 140 24% 92%;
+    --accent-foreground: 150 14% 12%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 140 10% 92%;
-    --input: 140 10% 92%;
-    --ring: 142 72% 45%;
+    --border: 145 12% 84%;
+    --input: 145 12% 84%;
+    --ring: 145 70% 32%;
     --radius: 1rem;
   }
 
@@ -81,7 +81,7 @@
 
   /* Dashboard background — fond coloré derrière les cartes */
   .dashboard-bg {
-    background-color: hsl(160, 18%, 93%);
+    background-color: hsl(160, 20%, 96%);
   }
   .dark .dashboard-bg {
     background-color: hsl(160, 8%, 3%);

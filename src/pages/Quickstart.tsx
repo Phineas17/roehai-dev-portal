@@ -19,7 +19,7 @@ const steps = [
     title: "Générer une clé API",
     content: (
       <p className="text-sm text-muted-foreground">
-        Dans <strong className="text-foreground font-medium">Dashboard → Paramètres → Clés API</strong>, créez une nouvelle clé.
+        Dans <strong className="text-foreground font-medium">Dashboard, Paramètres, Clés API</strong>, créez une nouvelle clé.
         Elle commence par{" "}
         <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-xs font-mono">sk_</code>.
       </p>
@@ -59,7 +59,7 @@ console.log("Appel lancé :", call.call_id);
     title: "Recevoir le résultat via Webhook",
     content: (
       <p className="text-sm text-muted-foreground mb-3">
-        Configurez votre URL webhook dans <strong className="text-foreground font-medium">Dashboard → Paramètres → Webhooks</strong> pour recevoir le transcript et le résumé.
+        Configurez votre URL webhook dans <strong className="text-foreground font-medium">Dashboard, Paramètres, Webhooks</strong> pour recevoir le transcript et le résumé.
       </p>
     ),
     code: `import { WebhookRouter } from "roehai-sdk";

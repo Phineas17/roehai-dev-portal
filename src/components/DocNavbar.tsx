@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { ExternalLink, Menu, X, Book, Zap, Key, Package, Code2, Phone, MessageSquare, Webhook, Terminal, Users, ChevronRight, LayoutDashboard } from "lucide-react";
-import { useState } from "react";
+import { ExternalLink, Menu, X, Book, Zap, Key, Package, Code2, Phone, MessageSquare, Webhook, Terminal, Users, ChevronRight, LayoutDashboard, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -30,8 +30,8 @@ const drawerSections = [
   {
     title: "Référence API",
     items: [
-      { label: "Aria - Appels vocaux", to: "/reference/aria", icon: Phone },
-      { label: "Léa - WhatsApp", to: "/reference/lea", icon: MessageSquare },
+      { label: "Aria, appels vocaux", to: "/reference/aria", icon: Phone },
+      { label: "Léa, WhatsApp", to: "/reference/lea", icon: MessageSquare },
       { label: "Webhooks", to: "/reference/webhooks", icon: Webhook },
     ],
   },
@@ -55,14 +55,26 @@ const drawerSections = [
 
 export function DocNavbar() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "dark";
+    const savedTheme = window.localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
 
   const close = () => setOpen(false);
+  const isDark = theme === "dark";
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    window.localStorage.setItem("theme", theme);
+  }, [isDark, theme]);
 
   return (
     <>
       {/* ── HEADER FLOATING CARD ── */}
-      <header className="sticky top-0 z-50 w-full px-3 sm:px-4 pt-3 pb-1.5">
-        <div className="max-w-7xl mx-auto bg-card border border-border rounded-2xl shadow-md px-4 h-13 flex items-center justify-between gap-3">
+      <header className="sticky top-0 z-50 w-full px-3 sm:px-4 pt-3 pb-2">
+        <div className="max-w-7xl mx-auto bg-card border border-border rounded-2xl shadow-md px-4 h-14 flex items-center justify-between gap-3">
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0" onClick={close}>
@@ -97,6 +109,16 @@ export function DocNavbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => setTheme(isDark ? "light" : "dark")}
+              className="w-8 h-8 flex items-center justify-center rounded-lg border border-border bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              aria-label={isDark ? "Activer le mode clair" : "Activer le mode sombre"}
+              title={isDark ? "Mode clair" : "Mode sombre"}
+            >
+              {isDark ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+
             {/* roehai.com - hidden on mobile */}
             <a
               href="https://www.roehai.com"
@@ -114,7 +136,7 @@ export function DocNavbar() {
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
             >
-              Dashboard →
+              Dashboard
             </a>
 
             {/* Hamburger - below lg */}
@@ -186,7 +208,7 @@ export function DocNavbar() {
                 onClick={close}
                 className="flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
               >
-                Ouvrir le Dashboard →
+                Ouvrir le Dashboard
               </a>
               <a
                 href="https://www.roehai.com"

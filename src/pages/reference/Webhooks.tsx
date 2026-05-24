@@ -68,7 +68,7 @@ const callFailedPayload = `{
 }`;
 
 const webhookConfigNote = `# URL de votre endpoint webhook à configurer dans :
-# Dashboard → Paramètres → Webhooks
+# Dashboard, Paramètres, Webhooks
 
 # Exemple d'URL
 https://monapp.com/webhooks/roehai
@@ -83,17 +83,17 @@ https://monapp.com/webhooks/roehai
 const events = [
   {
     event: "call.completed",
-    desc: "Appel terminé normalement - inclut transcript complet, résumé IA et données extraites",
+    desc: "Appel terminé normalement avec transcript complet, résumé IA et données extraites",
     color: "text-green-600 dark:text-green-400 bg-green-500/10 border-green-500/20",
   },
   {
     event: "call.failed",
-    desc: "Appel échoué - occupé, messagerie vocale, numéro invalide ou erreur technique",
+    desc: "Appel échoué à cause d'une ligne occupée, d'une messagerie vocale, d'un numéro invalide ou d'une erreur technique",
     color: "text-destructive bg-destructive/10 border-destructive/20",
   },
   {
     event: "call.started",
-    desc: "L'appel vient d'être décroché - utile pour tracker le timing",
+    desc: "L'appel vient d'être décroché, utile pour suivre le timing",
     color: "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
   },
   {

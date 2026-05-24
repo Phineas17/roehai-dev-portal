@@ -28,8 +28,8 @@ const docLinks = [
 ];
 
 const apiLinks = [
-  { label: "Aria - Appels vocaux", to: "/reference/aria" },
-  { label: "Léa - WhatsApp", to: "/reference/lea" },
+  { label: "Aria, appels vocaux", to: "/reference/aria" },
+  { label: "Léa, WhatsApp", to: "/reference/lea" },
   { label: "Webhooks", to: "/reference/webhooks" },
   { label: "Codes d'erreur", to: "/errors" },
 ];
