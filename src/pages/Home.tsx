@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Phone, MessageSquare, Webhook, Package, ArrowRight, Terminal, Key } from "lucide-react";
+import { Zap, Phone, MessageSquare, Webhook, Package, ArrowRight, Terminal, Key, BrainCircuit } from "lucide-react";
 import { CodeBlock } from "@/components/CodeBlock";
 
 const quickstart = `import { RoehAI } from "roehai-sdk";
@@ -23,6 +23,7 @@ const cards = [
   { icon: MessageSquare, title: "Léa, WhatsApp", desc: "Agent de support WhatsApp pour envoyer et recevoir des messages automatisés.", to: "/reference/lea", color: "text-primary" },
   { icon: Webhook, title: "Webhooks", desc: "Recevez les événements en temps réel, avec transcripts et qualifications.", to: "/reference/webhooks", color: "text-pink-500" },
   { icon: Terminal, title: "Guides", desc: "Zapier, n8n et Express.js pour intégrer RoehAI dans votre stack.", to: "/guides/zapier", color: "text-cyan-500" },
+  { icon: BrainCircuit, title: "MCP, assistants IA", desc: "Donnez un numéro de téléphone à Muse, Claude ou ChatGPT : 48 outils, un parcours guidé, des crédits prépayés.", to: "/guides/llm", color: "text-violet-500" },
 ];
 
 export function Home() {

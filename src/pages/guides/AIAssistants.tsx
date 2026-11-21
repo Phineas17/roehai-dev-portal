@@ -1,203 +1,168 @@
 import { CodeBlock } from "@/components/CodeBlock";
 import { LLMLogoStack } from "@/components/LLMLogoStack";
+import { Link } from "react-router-dom";
+import { ArrowRight, CheckCircle2, Clock3 } from "lucide-react";
 
-const mcpEndpoint = `https://www.roehai.com/mcp`;
+const MCP_URL = "https://www.roehai.com/mcp";
+
+const connectorFields = `Nom du connecteur : RoehAI
+URL du serveur MCP : ${MCP_URL}`;
+
+const firstMessage = `Connecte-toi à mon compte RoehAI et configure mon agent téléphonique.
+Voici ma clé API : sk_votre_cle
+Suis le playbook RoehAI de bout en bout, puis fais un appel test pour prouver que tout fonctionne.`;
+
+const dailyExamples = `« Appelle le +1 514 555 0100 et présente-lui notre offre de novembre. »
+« Envoie un texto à Marie pour confirmer son rendez-vous de demain. »
+« Quel est mon solde de minutes d'appel ? »
+« Mets à jour les instructions de mon agent : il doit toujours proposer un rappel si la personne est occupée. »
+« Achète 120 minutes de crédits avec ma carte enregistrée. »`;
 
 const steps = [
   {
-    n: 1,
-    title: "Verifier votre agent RoehAI",
-    desc: "Avant de connecter un LLM externe, assurez-vous que votre agent vocal est configure dans RoehAI avec son nom, son entreprise, ses consignes et ses messages d'accueil.",
+    title: "Créez votre clé API RoehAI",
+    body: "Connectez-vous à votre tableau de bord RoehAI, ouvrez l'onglet Clés API et utilisez la carte « Connecter à Muse » : la clé est créée en un clic, avec les permissions lecture et écriture. Vous pouvez aussi créer une clé classique depuis Paramètres, Clés API. Une clé expire après 12 mois et se révoque en tout temps au même endroit.",
   },
   {
-    n: 2,
-    title: "Creer une nouvelle connexion MCP",
-    desc: "Dans l'assistant compatible MCP, ajoutez une nouvelle app, integration ou connexion personnalisee. Le nom peut rester generique, par exemple RoehAI.",
+    title: "Ajoutez le serveur MCP à votre assistant",
+    body: "Dans Muse (Paramètres, Connecteurs, Ajouter un connecteur personnalisé) ou dans ChatGPT (Paramètres, Applications, Mode développeur, Créer une application), entrez l'adresse du serveur RoehAI. Aucun mot de passe RoehAI n'est demandé à cette étape : l'authentification se fait par votre clé API, à l'étape suivante.",
+    code: connectorFields,
   },
   {
-    n: 3,
-    title: "Utiliser le point d'entree RoehAI",
-    desc: "Renseignez l'URL MCP publique de RoehAI. C'est le meme endpoint pour les assistants compatibles avec les connexions MCP distantes.",
-    code: mcpEndpoint,
-    language: "bash",
+    title: "Collez votre clé dans la conversation",
+    body: "Démarrez une nouvelle conversation et envoyez votre clé à l'assistant, avec la demande de configuration. L'assistant vérifie la connexion en lisant le playbook officiel RoehAI, puis vous guide étape par étape, directement dans la conversation. Rien d'autre à installer, aucun autre écran à visiter.",
+    code: firstMessage,
   },
   {
-    n: 4,
-    title: "Choisir OAuth",
-    desc: "Selectionnez OAuth comme methode d'authentification. L'assistant ouvrira RoehAI pour demander l'autorisation d'acces a votre compte.",
+    title: "Laissez l'assistant tout configurer",
+    body: "Le parcours guidé couvre, dans l'ordre : l'état de votre compte, la création de votre agent téléphonique (nommé Muse par défaut, avec sa voix et ses instructions), le choix de votre numéro parmi au moins cinq propositions, l'achat de vos premiers crédits, puis un appel test réel. L'installation n'est terminée que lorsque votre agent répond pour vrai à l'appel test.",
   },
   {
-    n: 5,
-    title: "Autoriser les actions",
-    desc: "Connectez-vous a RoehAI, puis autorisez l'assistant. Les outils disponibles permettent de lire la configuration de l'agent, ajuster ses consignes et preparer des appels.",
-  },
-  {
-    n: 6,
-    title: "Tester avec une demande simple",
-    desc: "Demandez a l'assistant de recuperer la configuration actuelle de votre agent. Ensuite seulement, testez une modification ou une planification d'appel.",
+    title: "Pilotez votre ligne par conversation",
+    body: "Ensuite, tout se demande en langage naturel : passer un appel, envoyer un texto, consulter vos transcriptions, ajuster les instructions de l'agent, vérifier votre solde ou acheter des minutes. Votre assistant confirme toujours avec vous avant un appel sortant ou un achat.",
+    code: dailyExamples,
   },
 ];
 
-const prompts = `Recupere la configuration de mon agent vocal RoehAI.
-
-Configure mon agent pour se presenter comme l'assistant de mon entreprise.
-
-Prepare un appel pour ce prospect, mais ne le lance pas sans ma confirmation.`;
-
-const llmExamples = [
-  {
-    name: "ChatGPT",
-    desc: "Creer une app personnalisee, ajouter l'URL MCP, puis autoriser RoehAI via OAuth.",
-  },
-  {
-    name: "Claude",
-    desc: "Utiliser une connexion MCP distante lorsque l'espace de travail le permet, puis tester les outils RoehAI.",
-  },
-  {
-    name: "Gemini",
-    desc: "Reutiliser le meme point d'entree MCP des que l'environnement prend en charge les outils MCP distants.",
-  },
+const capabilities = [
+  ["Agents et voix", "Créer des agents, régler leur identité, leurs salutations, leurs instructions et leur voix parmi le catalogue."],
+  ["Appels", "Appels sortants immédiats ou planifiés, statut en direct, transcriptions et résumés."],
+  ["SMS", "Envoi de textos depuis vos numéros et suivi des conversations."],
+  ["Numéros", "Recherche de numéros canadiens et américains, achat et rattachement à un agent."],
+  ["Crédits", "Solde de minutes en temps réel et achat de crédits prépayés, sans abonnement."],
+  ["Missions", "Campagnes d'appels commerciaux : création, pilotage, prospects et rapports."],
 ];
 
-const screenshots = [
-  {
-    title: "Bouton LLM dans RoehAI",
-    desc: "Point d'entree depuis la configuration de l'agent vocal.",
-    src: "/screenshots/llm-guide/01-dashboard-llm-button.png",
-  },
-  {
-    title: "Guide LLM du portail developpeur",
-    desc: "Vue du guide avec les logos LLM, l'endpoint MCP et les exemples.",
-    src: "/screenshots/llm-guide/02-dev-portal-llm-guide.png",
-  },
-  {
-    title: "Creation de l'app dans ChatGPT",
-    desc: "Parametres de creation de l'app ou du connecteur RoehAI.",
-    src: "/screenshots/llm-guide/03-chatgpt-apps-settings.png",
-  },
-  {
-    title: "URL MCP et scopes",
-    desc: "Configuration de l'URL MCP publique et des permissions demandees.",
-    src: "/screenshots/llm-guide/04-chatgpt-mcp-url-scopes.png",
-  },
-  {
-    title: "Endpoints OAuth",
-    desc: "Configuration des URLs d'autorisation et de token OAuth.",
-    src: "/screenshots/llm-guide/05-chatgpt-oauth-endpoints.png",
-  },
-  {
-    title: "Autorisation RoehAI",
-    desc: "Ecran d'autorisation affiche avant de connecter le LLM au compte RoehAI.",
-    src: "/screenshots/llm-guide/04-roehai-oauth-authorization.png",
-  },
-  {
-    title: "Outils detectes dans ChatGPT",
-    desc: "Validation finale: ChatGPT voit les outils exposes par RoehAI.",
-    src: "/screenshots/llm-guide/07-chatgpt-after-connection.png",
-  },
+const pricing = [
+  ["Numéro de téléphone", "2 $ de frais d'activation, puis 3 $ par mois, affichés avant l'achat"],
+  ["60 minutes d'appels", "30 $"],
+  ["120 minutes d'appels", "55 $"],
+  ["250 minutes d'appels", "110 $"],
+  ["500 minutes d'appels", "215 $"],
 ];
 
 export function AIAssistantsGuide() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8">
-        <div className="mb-4">
+        <p className="text-sm text-muted-foreground mb-1">Guide</p>
+        <div className="flex flex-wrap items-center gap-4 mb-3">
+          <h1 className="text-3xl font-bold text-foreground tracking-tight">
+            Donner un numéro de téléphone à votre assistant IA
+          </h1>
           <LLMLogoStack />
         </div>
-        <p className="text-sm text-muted-foreground mb-1">Guides / LLM</p>
-        <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">
-          Connecter votre agent RoehAI a un LLM
-        </h1>
-        <p className="text-muted-foreground">
-          Exposez votre agent vocal RoehAI aux LLM compatibles MCP pour consulter sa configuration,
-          ajuster ses consignes et preparer des actions depuis votre espace de travail IA.
+        <p className="text-muted-foreground leading-relaxed">
+          RoehAI expose un serveur MCP de 48 outils à l'adresse{" "}
+          <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-sm font-mono">{MCP_URL}</code>.
+          Connectez-y Muse, Claude, ChatGPT ou tout autre assistant compatible MCP : votre assistant gagne une vraie
+          ligne téléphonique. Il passe et reçoit des appels, envoie des textos, prend des messages et gère vos agents
+          vocaux, le tout depuis votre conversation.
         </p>
       </div>
 
-      <div className="mb-8">
-        <LLMLogoStack showLabels />
-      </div>
-
-      <div className="rounded-xl bg-card border border-border p-4 mb-8 text-sm">
-        <p className="text-foreground font-medium mb-2">Point d'entree MCP</p>
-        <CodeBlock code={mcpEndpoint} language="bash" />
-        <p className="text-muted-foreground mt-3">
-          Ce domaine est stable pour les connexions externes. Utilisez toujours HTTPS.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-6">
-        {steps.map((step) => (
-          <div key={step.n} className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">
-                {step.n}
+      <div className="flex flex-col gap-8">
+        <section>
+          <h2 className="text-lg font-semibold text-foreground mb-4">Connexion en cinq étapes</h2>
+          <div className="flex flex-col gap-4">
+            {steps.map((step, i) => (
+              <div key={step.title} className="p-5 rounded-xl border border-border bg-card">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">
+                    {i + 1}
+                  </span>
+                  <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{step.body}</p>
+                {step.code && <CodeBlock code={step.code} language="text" />}
               </div>
-              {step.n < steps.length && (
-                <div className="w-px flex-1 bg-border mt-2" />
-              )}
-            </div>
-            <div className="flex-1 pb-4">
-              <h2 className="text-foreground font-semibold mb-1">{step.title}</h2>
-              <p className="text-sm text-muted-foreground mb-2">{step.desc}</p>
-              {step.code && <CodeBlock code={step.code} language={step.language} />}
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </section>
 
-      <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
-        <p className="text-foreground font-medium mb-3">Exemples de connexion LLM</p>
-        <div className="grid gap-3">
-          {llmExamples.map((item) => (
-            <div key={item.name} className="rounded-lg border border-border bg-muted/30 p-3">
-              <p className="font-medium text-foreground">{item.name}</p>
-              <p className="mt-1 text-muted-foreground">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+        <section>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Ce que votre assistant peut faire</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {capabilities.map(([title, desc]) => (
+              <div key={title} className="p-4 rounded-xl border border-border bg-card">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <CheckCircle2 size={14} className="text-primary shrink-0" />
+                  <span className="text-sm font-semibold text-foreground">{title}</span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-snug">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <Link to="/reference/mcp" className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium mt-4">
+            Voir la référence complète des 48 outils <ArrowRight size={13} />
+          </Link>
+        </section>
 
-      <div className="mt-6 p-4 rounded-xl bg-card border border-border text-sm">
-        <p className="text-foreground font-medium mb-2">Parcours en captures</p>
-        <p className="text-muted-foreground mb-4">
-          Ces captures montrent le chemin complet: depuis RoehAI, vers la configuration du LLM,
-          jusqu'a l'autorisation OAuth et la detection des outils.
-        </p>
-        <div className="grid gap-4">
-          {screenshots.map((item) => (
-            <figure key={item.src} className="overflow-hidden rounded-xl border border-border bg-muted/20">
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-full border-b border-border bg-background object-cover"
-                loading="lazy"
-              />
-              <figcaption className="p-3">
-                <p className="font-medium text-foreground">{item.title}</p>
-                <p className="mt-1 text-muted-foreground">{item.desc}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
+        <section>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Tarifs : crédits prépayés, sans abonnement</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+            Les appels fonctionnent aux crédits prépayés. Vous achetez des minutes quand vous en avez besoin,
+            depuis la conversation ou le tableau de bord, et votre solde se consulte en tout temps. Chaque achat
+            passe par un devis affiché à l'écran et n'est débité qu'après votre confirmation explicite.
+          </p>
+          <div className="rounded-xl border border-border overflow-hidden">
+            <table className="w-full text-sm">
+              <tbody>
+                {pricing.map(([label, price], i) => (
+                  <tr key={label} className={i % 2 === 0 ? "bg-card" : "bg-muted/20"}>
+                    <td className="px-4 py-2.5 text-muted-foreground">{label}</td>
+                    <td className="px-4 py-2.5 text-right font-medium text-foreground">{price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Les achats de minutes vont de 10 à 500 minutes, au prorata de la grille. Prix en dollars américains.
+          </p>
+        </section>
 
-      <div className="mt-8 p-4 rounded-xl bg-card border border-border text-sm">
-        <p className="text-foreground font-medium mb-2">Exemple pour ChatGPT</p>
-        <p className="text-muted-foreground mb-3">
-          Dans ChatGPT, creez une app personnalisee depuis Settings puis Apps, scannez les outils,
-          puis autorisez RoehAI via OAuth.
-        </p>
-        <CodeBlock code={prompts} language="text" />
-      </div>
+        <section>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Sécurité de la connexion</h2>
+          <ul className="flex flex-col gap-2 text-sm text-muted-foreground leading-relaxed">
+            <li>Votre clé API voyage uniquement dans les en-têtes des requêtes de votre assistant, jamais dans une adresse web.</li>
+            <li>Les permissions de la clé sont appliquées côté serveur : une clé en lecture seule ne peut ni appeler, ni acheter, ni modifier un agent.</li>
+            <li>Chaque achat (numéro ou crédits) exige un devis serveur à usage unique et votre confirmation explicite avant le débit.</li>
+            <li>Le serveur limite le débit à 180 requêtes par minute par compte et journalise les tentatives d'authentification échouées.</li>
+            <li>Perte ou doute : révoquez la clé depuis le tableau de bord, l'accès cesse immédiatement.</li>
+          </ul>
+        </section>
 
-      <div className="mt-6 p-4 rounded-xl bg-muted/40 border border-border text-sm">
-        <p className="text-foreground font-medium mb-2">Bonnes pratiques</p>
-        <ul className="text-muted-foreground space-y-1.5">
-          <li>Demandez toujours un resume avant de modifier la configuration d'un agent.</li>
-          <li>Gardez les actions sensibles, comme le lancement d'un appel, avec confirmation explicite.</li>
-          <li>Reconnectez votre compte si l'assistant indique que l'autorisation a expire.</li>
-        </ul>
+        <section className="p-5 rounded-xl border border-border bg-card">
+          <div className="flex items-center gap-2 mb-2">
+            <Clock3 size={15} className="text-primary" />
+            <h2 className="text-base font-semibold text-foreground">Bientôt : la connexion en un clic</h2>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Une connexion OAuth est en préparation : elle remplacera le collage de la clé par un écran d'autorisation
+            RoehAI. En attendant, la clé API décrite dans ce guide est la méthode officielle et entièrement fonctionnelle.
+          </p>
+        </section>
       </div>
     </div>
   );

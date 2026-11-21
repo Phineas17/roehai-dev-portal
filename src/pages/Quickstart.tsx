@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/CodeBlock";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, BrainCircuit } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const steps = [
@@ -110,6 +110,19 @@ export function Quickstart() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Alternative MCP */}
+      <div className="mb-4 p-4 rounded-xl border border-border bg-card flex items-start gap-3">
+        <BrainCircuit size={17} className="text-primary mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground mb-1">Vous travaillez avec un assistant IA ?</p>
+          <p className="text-sm text-muted-foreground">
+            Plutôt que d'écrire du code, connectez Muse, Claude ou ChatGPT au serveur MCP RoehAI avec la même clé API :
+            votre assistant configure votre agent, achète votre numéro et passe vos appels depuis la conversation.{" "}
+            <Link to="/guides/llm" className="text-primary hover:underline font-medium">Suivre le guide Assistants IA</Link>
+          </p>
+        </div>
       </div>
 
       {/* Success */}

@@ -24,6 +24,7 @@ const sections = [
       { label: "Aria, appels vocaux", to: "/reference/aria", icon: Phone },
       { label: "Léa, WhatsApp", to: "/reference/lea", icon: MessageSquare },
       { label: "Webhooks", to: "/reference/webhooks", icon: Webhook },
+      { label: "MCP, 48 outils", to: "/reference/mcp", icon: BrainCircuit },
     ],
   },
   {
@@ -40,7 +41,7 @@ const sections = [
     title: "Autre",
     items: [
       { label: "Codes d'erreur", to: "/errors", icon: ChevronRight },
-      { label: "Changelog", to: "/changelog", icon: ChevronRight, badge: "v1.0" },
+      { label: "Changelog", to: "/changelog", icon: ChevronRight, badge: "v1.1" },
     ],
   },
 ];

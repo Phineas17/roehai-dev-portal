@@ -7,6 +7,7 @@ import { Sdk } from "@/pages/Sdk";
 import { AriaReference } from "@/pages/reference/Aria";
 import { LeaReference } from "@/pages/reference/Lea";
 import { WebhooksReference } from "@/pages/reference/Webhooks";
+import { McpReference } from "@/pages/reference/Mcp";
 import { WebhookExpressGuide } from "@/pages/guides/WebhookExpress";
 import { ZapierGuide } from "@/pages/guides/Zapier";
 import { N8nGuide } from "@/pages/guides/N8n";
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/reference/aria" element={<AriaReference />} />
           <Route path="/reference/lea" element={<LeaReference />} />
           <Route path="/reference/webhooks" element={<WebhooksReference />} />
+          <Route path="/reference/mcp" element={<McpReference />} />
           <Route path="/guides/webhook-express" element={<WebhookExpressGuide />} />
           <Route path="/guides/zapier" element={<ZapierGuide />} />
           <Route path="/guides/n8n" element={<N8nGuide />} />

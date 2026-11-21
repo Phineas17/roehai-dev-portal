@@ -69,6 +69,24 @@ export function Auth() {
         </section>
 
         <section>
+          <h2 className="text-lg font-semibold text-foreground mb-3">Les mêmes clés pour le serveur MCP</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+            Le serveur MCP (<code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-xs font-mono">https://www.roehai.com/mcp</code>)
+            utilise les mêmes clés API que l'API REST. Votre assistant la présente dans l'en-tête{" "}
+            <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-xs font-mono">Authorization: Bearer</code>{" "}
+            ou <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-xs font-mono">x-roehai-token</code>,
+            jamais dans une adresse ni en paramètre d'outil.
+          </p>
+          <ul className="text-sm text-muted-foreground space-y-1.5">
+            <li><strong className="text-foreground">Permissions appliquées :</strong> une clé avec la permission « read » consulte le compte ; les appels, achats et modifications exigent « write ». Une clé limitée ne peut pas dépasser son périmètre.</li>
+            <li><strong className="text-foreground">Expiration :</strong> chaque clé expire 12 mois après sa création. Le tableau de bord affiche la date et permet de la remplacer avant l'échéance.</li>
+            <li><strong className="text-foreground">Plafond :</strong> 10 clés actives par compte.</li>
+            <li><strong className="text-foreground">Limites de débit :</strong> 180 requêtes par minute et par compte sur le serveur MCP ; les tentatives avec une clé invalide sont journalisées.</li>
+            <li><strong className="text-foreground">Révocation :</strong> immédiate depuis le tableau de bord, l'assistant perd l'accès à la requête suivante.</li>
+          </ul>
+        </section>
+
+        <section>
           <div className="p-4 rounded-xl border border-border bg-card">
             <div className="flex items-center gap-2 mb-3">
               <Shield size={15} className="text-primary" />
