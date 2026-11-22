@@ -100,3 +100,62 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
 }
+
+/* ── Repris du site principal (www.roehai.com) : verre, bouton dégradé, filigrane animé ── */
+.glass {
+  @apply bg-card/80 backdrop-blur-lg border border-border;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(225deg, hsl(var(--primary) / 0.15), hsl(var(--primary) / 0.03));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glass-hover {
+  @apply transition-all duration-300 hover:bg-card/70;
+}
+
+.button-gradient {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--primary) / 0.97),
+    hsl(var(--primary) / 0.93)
+  ) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border: 1px solid hsl(var(--primary-foreground) / 0.18) !important;
+  box-shadow: inset 0 2px 0 hsl(var(--primary-foreground) / 0.68) !important;
+  border-radius: 20px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-gradient::after {
+  display: none !important;
+}
+.button-gradient:hover {
+  transform: translateY(-2px) !important;
+  opacity: 0.95 !important;
+}
+
+@keyframes text-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-text-shimmer {
+  animation: text-shimmer 6s linear infinite;
+}

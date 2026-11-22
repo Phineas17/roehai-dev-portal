@@ -1,68 +1,209 @@
-import { Link, NavLink } from "react-router-dom";
-import { ExternalLink, Menu, X, Book, Zap, Key, Package, Code2, Phone, MessageSquare, Webhook, Terminal, Users, ChevronRight, LayoutDashboard, Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { Link, useLocation } from "react-router-dom";
+import {
+  Menu, X, ChevronDown, ArrowRight, Moon, Sun,
+  PhoneCall, Zap, Users, Calendar, Database,
+  Mic, Clock, BarChart2, PhoneForwarded, Wand2,
+  ShieldCheck, LayoutGrid, LayoutTemplate, Stethoscope, Car,
+  UtensilsCrossed, Landmark, Briefcase, Building2,
+  Scale, Dumbbell, Scissors, GraduationCap,
+  Plane, ShoppingBag,
+} from "lucide-react";
+import { useEffect, useState, type ElementType } from "react";
+import { sidebarSections } from "./Sidebar";
 
-const navLinks = [
-  { label: "Quickstart", to: "/quickstart" },
-  { label: "SDK", to: "/sdk" },
-  { label: "API Aria", to: "/reference/aria" },
-  { label: "Webhooks", to: "/reference/webhooks" },
-  { label: "Guides", to: "/guides/zapier" },
+// Header identique à celui du site principal (www.roehai.com) :
+// barre fixe qui se condense en pastille au défilement, menus déroulants
+// bureau, et panneau mobile accroché sous la barre (pas de tiroir latéral).
+const SITE = "https://www.roehai.com";
+
+type NavItem = {
+  icon: ElementType;
+  label: string;
+  href: string;
+  internal?: boolean;
+};
+
+const FEATURES: NavItem[] = [
+  { icon: PhoneCall, label: "Réponse aux appels IA", href: `${SITE}/automatisation-appels-entreprise` },
+  { icon: Zap, label: "Appels sortants auto", href: `${SITE}/automatisation-appels-entreprise` },
+  { icon: Users, label: "Qualification de leads", href: `${SITE}/agent-vocal-ia-canada` },
+  { icon: Calendar, label: "Prise de rendez-vous", href: `${SITE}/ia-prise-rendez-vous` },
+  { icon: Database, label: "Intégrations CRM", href: "/quickstart", internal: true },
+  { icon: Mic, label: "Voix personnalisée", href: `${SITE}/agent-vocal-ia-canada` },
+  { icon: Clock, label: "Disponibilité 24/7", href: `${SITE}/receptionniste-ia-canada` },
+  { icon: BarChart2, label: "Analytics & rapports", href: `${SITE}/agent-vocal-ia-canada` },
+  { icon: PhoneForwarded, label: "Transfert d'appels", href: `${SITE}/automatisation-appels-entreprise` },
+  { icon: Wand2, label: "Voix naturelle (NLP)", href: `${SITE}/agent-vocal-ia-canada` },
+  { icon: ShieldCheck, label: "Vérification prospects", href: `${SITE}/comparatif-agent-vocal-ia-receptionniste` },
+  { icon: LayoutGrid, label: "Portail libre-service", href: `${SITE}/agent-vocal-ia-canada` },
+  { icon: LayoutTemplate, label: "Templates", href: `${SITE}/templates` },
 ];
 
-const drawerSections = [
-  {
-    title: "Démarrage",
-    items: [
-      { label: "Introduction", to: "/", icon: Book },
-      { label: "Quickstart", to: "/quickstart", icon: Zap },
-      { label: "Authentification", to: "/auth", icon: Key },
-    ],
-  },
-  {
-    title: "SDK",
-    items: [
-      { label: "Installation", to: "/sdk", icon: Package },
-      { label: "Référence SDK", to: "/sdk/reference", icon: Code2 },
-    ],
-  },
-  {
-    title: "Référence API",
-    items: [
-      { label: "Aria, appels vocaux", to: "/reference/aria", icon: Phone },
-      { label: "Léa, WhatsApp", to: "/reference/lea", icon: MessageSquare },
-      { label: "Webhooks", to: "/reference/webhooks", icon: Webhook },
-    ],
-  },
-  {
-    title: "Guides",
-    items: [
-      { label: "Intégrer Zapier", to: "/guides/zapier", icon: LayoutDashboard },
-      { label: "Intégrer n8n", to: "/guides/n8n", icon: LayoutDashboard },
-      { label: "Webhook Express.js", to: "/guides/webhook-express", icon: Terminal },
-      { label: "Qualifier des leads", to: "/guides/leads", icon: Users },
-    ],
-  },
-  {
-    title: "Autre",
-    items: [
-      { label: "Codes d'erreur", to: "/errors", icon: ChevronRight },
-      { label: "Changelog", to: "/changelog", icon: ChevronRight },
-    ],
-  },
+const INDUSTRIES: NavItem[] = [
+  { icon: Stethoscope, label: "Cliniques médicales", href: `${SITE}/agent-vocal-ia-cliniques-medicales` },
+  { icon: Car, label: "Garages automobiles", href: `${SITE}/agent-vocal-ia-garages-automobiles` },
+  { icon: UtensilsCrossed, label: "Restaurants", href: `${SITE}/agent-vocal-ia-restaurants` },
+  { icon: Landmark, label: "Assurances", href: `${SITE}/agent-vocal-ia-assurances` },
+  { icon: Briefcase, label: "Services professionnels", href: `${SITE}/agent-vocal-ia-services-professionnels` },
+  { icon: Building2, label: "Immobilier", href: `${SITE}/agent-vocal-ia-immobilier` },
+  { icon: Scale, label: "Services juridiques", href: `${SITE}/agent-vocal-ia-services-juridiques` },
+  { icon: Dumbbell, label: "Fitness & bien-être", href: `${SITE}/agent-vocal-ia-fitness-bien-etre` },
+  { icon: Scissors, label: "Beauté & spa", href: `${SITE}/agent-vocal-ia-beaute-spa` },
+  { icon: GraduationCap, label: "Éducation", href: `${SITE}/agent-vocal-ia-education` },
+  { icon: Plane, label: "Voyage & tourisme", href: `${SITE}/agent-vocal-ia-voyage-tourisme` },
+  { icon: ShoppingBag, label: "Commerce & vente", href: `${SITE}/agent-vocal-ia-commerce-vente` },
 ];
+
+const SIMPLE_LINKS = [
+  { label: "Devenir partenaire", href: `${SITE}/devenir-partenaire` },
+  { label: "Prix", href: `${SITE}/pricing` },
+  { label: "Blog", href: `${SITE}/blog` },
+  { label: "Contact", href: `${SITE}/contact` },
+];
+
+function ItemLink({ item, className, onNavigate }: { item: NavItem; className: string; onNavigate?: () => void }) {
+  const Icon = item.icon;
+  const content = (
+    <>
+      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" />
+      <span className="text-sm">{item.label}</span>
+    </>
+  );
+  if (item.internal) {
+    return (
+      <Link to={item.href} onClick={onNavigate} className={className}>
+        {content}
+      </Link>
+    );
+  }
+  return (
+    <a href={item.href} onClick={onNavigate} className={className}>
+      {content}
+    </a>
+  );
+}
+
+/* ── Menu déroulant bureau, comme sur le site ── */
+function DesktopDropdown({
+  label,
+  items,
+  viewAllHref,
+  viewAllLabel,
+}: {
+  label: string;
+  items: NavItem[];
+  viewAllHref: string;
+  viewAllLabel: string;
+}) {
+  const [open, setOpen] = useState(false);
+  let timeout: ReturnType<typeof setTimeout>;
+  const show = () => { clearTimeout(timeout); setOpen(true); };
+  const hide = () => { timeout = setTimeout(() => setOpen(false), 120); };
+
+  return (
+    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
+      <button
+        className="flex items-center gap-1 text-xs lg:text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-label={`${label} menu`}
+      >
+        {label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 min-w-[480px]">
+          <div className="bg-card border border-border rounded-2xl shadow-2xl p-4">
+            <div className="grid gap-1 grid-cols-2">
+              {items.map((item) => (
+                <ItemLink
+                  key={item.label}
+                  item={item}
+                  onNavigate={() => setOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors group"
+                />
+              ))}
+            </div>
+            <div className="border-t border-border/50 mt-3 pt-3">
+              <a
+                href={viewAllHref}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium px-3"
+              >
+                {viewAllLabel} <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Section accordéon du panneau mobile, comme sur le site ── */
+function MobileSection({
+  label,
+  items,
+  viewAllHref,
+  viewAllLabel,
+  onNavigate,
+}: {
+  label: string;
+  items: NavItem[];
+  viewAllHref?: string;
+  viewAllLabel?: string;
+  onNavigate: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-b border-border/50">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-3.5 text-base font-medium text-foreground hover:text-primary transition-colors"
+        aria-expanded={open}
+        aria-label={`Basculer la section ${label}`}
+      >
+        {label}
+        <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className="pb-3 grid grid-cols-2 gap-1">
+          {items.map((item) => (
+            <ItemLink
+              key={item.label + item.href}
+              item={item}
+              onNavigate={onNavigate}
+              className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors group text-sm"
+            />
+          ))}
+          {viewAllHref && viewAllLabel && (
+            <a
+              href={viewAllHref}
+              onClick={onNavigate}
+              className="col-span-2 flex items-center gap-1.5 text-sm text-primary font-medium px-2 pt-1"
+            >
+              {viewAllLabel} <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function DocNavbar() {
-  const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window === "undefined") return "dark";
     const savedTheme = window.localStorage.getItem("theme");
     if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
-
-  const close = () => setOpen(false);
   const isDark = theme === "dark";
 
   useEffect(() => {
@@ -70,159 +211,177 @@ export function DocNavbar() {
     window.localStorage.setItem("theme", theme);
   }, [isDark, theme]);
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const closeMobile = () => setIsMobileMenuOpen(false);
+
+  const themeButton = (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="w-8 h-8 flex items-center justify-center rounded-lg border border-border bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors shrink-0"
+      aria-label={isDark ? "Activer le mode clair" : "Activer le mode sombre"}
+      title={isDark ? "Mode clair" : "Mode sombre"}
+    >
+      {isDark ? <Sun size={15} /> : <Moon size={15} />}
+    </button>
+  );
+
   return (
-    <>
-      {/* ── HEADER FLOATING CARD ── */}
-      <header className="sticky top-0 z-50 w-full px-3 sm:px-4 pt-3 pb-2">
-        <div className="max-w-7xl mx-auto bg-card border border-border rounded-2xl shadow-md px-4 h-14 flex items-center justify-between gap-3">
+    <header
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 top-3.5 ${
+        isScrolled
+          ? "h-12 sm:h-14 rounded-xl bg-background/40 backdrop-blur-xl border border-border scale-95 w-[95%] sm:w-[92%] lg:w-[90%] xl:w-[88%] max-w-7xl"
+          : "h-12 sm:h-14 rounded-none bg-background border-y border-border w-[94%] sm:w-[96%] lg:w-[calc(100%-4rem)] xl:w-[calc(100%-6rem)] max-w-7xl lg:max-w-none 2xl:w-full 2xl:max-w-[1440px]"
+      } ${isMobileMenuOpen && !isScrolled ? "max-xl:rounded-b-none" : ""}`}
+    >
+      <div className="mx-auto h-full px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6">
+        <nav className="flex items-center justify-between h-full">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0" onClick={close}>
-            <img src="/logo-roehai.png" alt="RoehAI" className="h-7 w-auto" />
-            <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-sm text-foreground">RoehAI</span>
-              <span className="text-[11px] font-medium bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-md leading-none">
-                Developers
-              </span>
-            </div>
+          <Link to="/" className="flex items-center gap-2 shrink-0" onClick={closeMobile}>
+            <img src="/logo-roehai.png" alt="RoehAI Logo" className="h-8 mr-1" width={32} height={32} />
+            <span className="font-bold text-base">RoehAI</span>
+            <span className="text-[11px] font-medium bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-md leading-none">
+              Developers
+            </span>
           </Link>
 
-          {/* Desktop nav links - lg+ only */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center text-sm">
-            {navLinks.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  cn(
-                    "px-3 py-1.5 rounded-lg text-sm transition-colors whitespace-nowrap",
-                    isActive
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )
-                }
+          {/* ── Navigation bureau ── */}
+          <div className="hidden xl:flex min-w-0 items-center gap-3 xl:gap-4 2xl:gap-5">
+            <DesktopDropdown
+              label="Fonctionnalités"
+              items={FEATURES}
+              viewAllHref={`${SITE}/agent-vocal-ia-canada`}
+              viewAllLabel="Voir toutes les fonctionnalités"
+            />
+            <DesktopDropdown
+              label="Secteurs d'activité"
+              items={INDUSTRIES}
+              viewAllHref={`${SITE}/agent-vocal-ia-canada`}
+              viewAllLabel="Voir tous les secteurs"
+            />
+
+            {SIMPLE_LINKS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
               >
                 {item.label}
-              </NavLink>
+              </a>
             ))}
-          </nav>
 
-          {/* Right actions */}
-          <div className="flex items-center gap-2 shrink-0">
+            <Link to="/" className="text-sm text-primary font-medium hover:text-primary/80 transition-colors whitespace-nowrap">
+              Développeurs
+            </Link>
+
+            {themeButton}
+
+            <a href={`${SITE}/auth`} className="button-gradient text-sm px-4 h-9 shrink-0 font-medium">
+              Commencer
+            </a>
+          </div>
+
+          {/* ── Bouton mobile ── */}
+          <div className="xl:hidden flex items-center gap-2">
+            {themeButton}
             <button
               type="button"
-              onClick={() => setTheme(isDark ? "light" : "dark")}
-              className="w-8 h-8 flex items-center justify-center rounded-lg border border-border bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-              aria-label={isDark ? "Activer le mode clair" : "Activer le mode sombre"}
-              title={isDark ? "Mode clair" : "Mode sombre"}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`h-10 w-10 inline-flex items-center justify-center rounded-md text-foreground transition-colors ${
+                isScrolled
+                  ? "border border-border bg-background/40 backdrop-blur-xl"
+                  : "border border-transparent bg-transparent"
+              }`}
+              aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMobileMenuOpen}
             >
-              {isDark ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-
-            {/* roehai.com - hidden on mobile */}
-            <a
-              href="https://www.roehai.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              roehai.com <ExternalLink size={12} />
-            </a>
-
-            {/* Dashboard CTA - compact on mobile */}
-            <a
-              href="https://www.roehai.com/dashboard"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
-            >
-              Dashboard
-            </a>
-
-            {/* Hamburger - below lg */}
-            <button
-              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-              onClick={() => setOpen(!open)}
-              aria-label="Menu"
-            >
-              {open ? <X size={18} /> : <Menu size={18} />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-        </div>
-      </header>
 
-      {/* ── MOBILE / TABLET DRAWER ── */}
-      {open && (
-        <div className="lg:hidden fixed inset-0 z-40">
-          {/* Backdrop - full screen, below header */}
-          <div
-            className="absolute inset-0 bg-background/60 backdrop-blur-sm"
-            onClick={close}
-          />
+        </nav>
+      </div>
 
-          {/* Floating card - suspended below header, with margins */}
-          <div className="absolute top-[4.5rem] left-3 bottom-3 w-72 max-w-[calc(100vw-1.5rem)] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-left-4 duration-200">
+      {/* ── Panneau mobile, accroché sous la barre comme sur le site ── */}
+      {isMobileMenuOpen && (
+        <div className={`xl:hidden absolute left-0 right-0 top-full bg-card border border-border shadow-2xl ${isScrolled ? "mt-2 rounded-xl" : "-mt-px rounded-b-xl"} overflow-y-auto max-h-[calc(100dvh-7rem)] animate-in fade-in duration-200`}>
+          <div className="p-5 space-y-0">
 
-            {/* Drawer nav */}
-            <div className="flex-1 overflow-y-auto px-3 py-4 flex flex-col gap-5">
-              {drawerSections.map((section) => (
-                <div key={section.title}>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground px-2 mb-1.5">
-                    {section.title}
-                  </p>
-                  <ul className="flex flex-col gap-0.5">
-                    {section.items.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <li key={item.to}>
-                          <NavLink
-                            to={item.to}
-                            end={item.to === "/"}
-                            onClick={close}
-                            className={({ isActive }) =>
-                              cn(
-                                "flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors",
-                                isActive
-                                  ? "nav-active"
-                                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                              )
-                            }
-                          >
-                            <Icon size={14} className="shrink-0 opacity-70" />
-                            {item.label}
-                          </NavLink>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            {/* Documentation du portail, mêmes sections que la barre latérale bureau */}
+            {sidebarSections.map((section) => (
+              <MobileSection
+                key={section.title}
+                label={section.title}
+                items={section.items.map((item) => ({
+                  icon: item.icon,
+                  label: item.label,
+                  href: item.to,
+                  internal: true,
+                }))}
+                onNavigate={closeMobile}
+              />
+            ))}
 
-            {/* Drawer footer */}
-            <div className="px-4 py-4 border-t border-border space-y-2">
+            {/* Sections du site principal */}
+            <MobileSection
+              label="Fonctionnalités"
+              items={FEATURES}
+              viewAllHref={`${SITE}/agent-vocal-ia-canada`}
+              viewAllLabel="Voir toutes les fonctionnalités"
+              onNavigate={closeMobile}
+            />
+            <MobileSection
+              label="Secteurs d'activité"
+              items={INDUSTRIES}
+              viewAllHref={`${SITE}/agent-vocal-ia-canada`}
+              viewAllLabel="Voir tous les secteurs"
+              onNavigate={closeMobile}
+            />
+
+            {SIMPLE_LINKS.map((item) => (
               <a
-                href="https://www.roehai.com/dashboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={close}
-                className="flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
+                key={item.href}
+                href={item.href}
+                onClick={closeMobile}
+                className="block py-3.5 text-base font-medium text-foreground hover:text-primary transition-colors border-b border-border/50"
               >
-                Ouvrir le Dashboard
+                {item.label}
               </a>
+            ))}
+            <Link
+              to="/"
+              onClick={closeMobile}
+              className="block py-3.5 text-base font-medium text-primary border-b border-border/50"
+            >
+              Développeurs →
+            </Link>
+
+            {/* Appels à l'action */}
+            <div className="pt-4 space-y-3">
               <a
-                href="https://www.roehai.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                href={`${SITE}/dashboard`}
+                onClick={closeMobile}
+                className="w-full h-11 inline-flex items-center justify-center rounded-md border border-border bg-background text-sm font-medium hover:bg-accent transition-colors"
               >
-                roehai.com <ExternalLink size={11} />
+                Tableau de bord
               </a>
-              <p className="text-[11px] text-muted-foreground text-center">API version: <span className="text-primary font-medium">v1</span></p>
+              <a href={`${SITE}/auth`} onClick={closeMobile} className="button-gradient w-full h-11 text-sm font-medium">
+                Commencer
+              </a>
             </div>
           </div>
         </div>
       )}
-    </>
+    </header>
   );
 }

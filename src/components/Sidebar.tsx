@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Zap, Book, Code2, Webhook, Key, Terminal, Package, ChevronRight, Phone, MessageSquare, Users, LayoutDashboard, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const sections = [
+export const sidebarSections = [
   {
     title: "Démarrage",
     items: [
@@ -49,7 +49,7 @@ const sections = [
 export function Sidebar() {
   return (
     <div className="flex flex-col gap-5 py-5 px-3 overflow-y-auto flex-1">
-      {sections.map((section) => (
+      {sidebarSections.map((section) => (
         <div key={section.title}>
           <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground px-3 mb-1.5">
             {section.title}

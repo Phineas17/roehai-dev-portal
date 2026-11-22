@@ -8,8 +8,11 @@ export function Layout() {
     <div className="min-h-screen flex flex-col dashboard-bg">
       <DocNavbar />
 
+      {/* Le header est fixe comme sur le site (top 0,875 rem + hauteur 3,5 rem) : espaceur dédié */}
+      <div className="h-[4.375rem] shrink-0" aria-hidden="true" />
+
       {/* Desktop: cartes séparées sur fond coloré — hauteur fixe, seul le contenu inner défile */}
-      <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 py-5 hidden lg:flex gap-4 items-start h-[calc(100vh-4.5rem)]">
+      <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 py-5 hidden lg:flex gap-4 items-start h-[calc(100vh-4.375rem)]">
         {/* Sidebar card */}
         <aside className="w-60 shrink-0 h-full bg-card rounded-2xl border border-border shadow-md flex flex-col overflow-hidden">
           <Sidebar />
