@@ -86,7 +86,7 @@ export function WebhookExpressGuide() {
           <ul className="text-muted-foreground space-y-1.5">
             <li>Répondez toujours <code className="text-primary bg-primary/10 px-1 rounded text-xs font-mono">200</code> rapidement. RoehAI retente si aucune réponse n'arrive en 10s</li>
             <li>Traitez le payload de manière asynchrone si nécessaire</li>
-            <li>En production, vérifiez la signature HMAC disponible en v1.1</li>
+            <li>La signature HMAC des webhooks est en préparation (voir la feuille de route au changelog). En attendant, protégez votre endpoint : vérifiez un secret partagé transmis dans un en-tête dédié, ou restreignez les sources autorisées à vous appeler</li>
           </ul>
         </div>
       </div>

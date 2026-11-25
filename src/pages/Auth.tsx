@@ -81,7 +81,7 @@ export function Auth() {
             <li><strong className="text-foreground">Permissions appliquées :</strong> une clé avec la permission « read » consulte le compte ; les appels, achats et modifications exigent « write ». Une clé limitée ne peut pas dépasser son périmètre.</li>
             <li><strong className="text-foreground">Expiration :</strong> chaque clé expire 12 mois après sa création. Le tableau de bord affiche la date et permet de la remplacer avant l'échéance.</li>
             <li><strong className="text-foreground">Plafond :</strong> 10 clés actives par compte.</li>
-            <li><strong className="text-foreground">Limites de débit :</strong> 180 requêtes par minute et par compte sur le serveur MCP ; les tentatives avec une clé invalide sont journalisées.</li>
+            <li><strong className="text-foreground">Limites de débit :</strong> des limites de débit s'appliquent par compte sur le serveur MCP ; les tentatives avec une clé invalide sont journalisées.</li>
             <li><strong className="text-foreground">Révocation :</strong> immédiate depuis le tableau de bord, l'assistant perd l'accès à la requête suivante.</li>
           </ul>
         </section>

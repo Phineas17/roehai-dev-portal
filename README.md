@@ -9,7 +9,7 @@ l'API REST, le SDK JavaScript et les webhooks.
 - **Guide Assistants IA** (`/guides/llm`) : donner un numéro de téléphone à Muse, Claude ou ChatGPT via le serveur MCP `https://www.roehai.com/mcp`, connexion par clé API et parcours guidé.
 - **Référence MCP** (`/reference/mcp`) : les 48 outils du serveur, par famille, avec paramètres et permissions. Les données de la page sont générées depuis la liste réelle du serveur (`src/data/mcpTools.ts`) : à régénérer à chaque évolution du serveur.
 - **Référence API REST** : Aria (appels vocaux), Léa (WhatsApp) et les webhooks.
-- **SDK** : installation et référence du package `roehai-sdk` (dépôt séparé : Phineas17/roehai-sdk).
+- **SDK** : installation et référence du package `roehai-sdk` (dépôt séparé : phineasRoeh/roehai-sdk).
 - **Changelog** : l'historique des versions de la plateforme développeur.
 
 ## Règles éditoriales
